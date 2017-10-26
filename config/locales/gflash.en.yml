@@ -1,0 +1,35 @@
+en:
+  gflash:
+    #
+    # These are the translations for the different titles.
+    #
+    titles:
+      notice: "Notice"
+      success: "Success"
+      warning: "Warning"
+      error: "Error"
+      progress: "Progress"
+    #
+    # Add default gflash messages:
+    # defaults:
+    #   success: "You have successfully signed in!"
+    #   error: "Something went wrong"
+    #   create:
+    #     success: "Successfully created!"
+    #     error: "Something went wrong. Please take a look at the form to see what went wrong."
+    #
+    # Add gflash messages for controller actions:
+    # sessions:
+    #   create:
+    #     success: "Hello, %{name}! You have successfully signed in!"
+    #     error: "Something went wrong"
+    #   destroy:
+    #     success: "Goodbye, %{name}! You have successfully signed out!"
+    #     error: "Something went wrong"
+    # home:
+    #   profile:
+    #     notice: "You must be signed in to access this page!"
+    #
+    # Inside controller: 
+    # gflash :notice, :error
+    #

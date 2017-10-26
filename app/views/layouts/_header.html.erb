@@ -1,0 +1,16 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Test GitApp", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li>Signed in as <%= current_user.name %> <%= image_tag(current_user.profile_image, width: '50', height: '50', class: 'img-circle') %> </li>
+            <li>
+              <%= link_to "Log out", sign_out_path, method: "delete"%> 
+            </li>
+            </ul>
+        <% end %>
+        </ul>
+      </nav>
+  </div>
+</header>
