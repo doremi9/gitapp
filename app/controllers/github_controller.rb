@@ -15,15 +15,10 @@ class GithubController < ApplicationController
     @repos = github.repos.list
     unless @repos.nil?
       @repos.each do |repo|
-        current_user.repos.find_or_create_by(name: repo["name"], url: repo["html_url"], pull_requests_url: repo["pulls_url"])
+        current_user.repos.find_or_create_by(name: repo.name)
       end
     end
-    redirect_to profile_path
-  end
-
-  def profile
-    redirect_to root_path unless current_user
-    @repos = current_user.repos
+    redirect_to repos_path
   end
 
   def destroy
