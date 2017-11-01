@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030084320) do
+ActiveRecord::Schema.define(version: 20171101114433) do
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "avatar_url"
+    t.string   "description"
+    t.index ["user_id"], name: "index_organizations_on_user_id"
+  end
 
   create_table "pull_requests", force: :cascade do |t|
     t.integer  "pr_id"
@@ -23,12 +33,12 @@ ActiveRecord::Schema.define(version: 20171030084320) do
     t.index ["repo_id"], name: "index_pull_requests_on_repo_id"
   end
 
-  create_table "repos", force: :cascade do |t|
+  create_table "repositories", force: :cascade do |t|
     t.string   "name"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_repos_on_user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "organization_id"
+    t.index ["organization_id"], name: "index_repositories_on_organization_id"
   end
 
   create_table "users", force: :cascade do |t|

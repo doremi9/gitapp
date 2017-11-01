@@ -8,8 +8,8 @@ class GithubController < ApplicationController
     session[:omniauth] = auth.except('extra')
     user = User.sign_in_from_omniauth(auth)
     session[:user_id] = user.id
-    github(auth.extra.login, auth.credentials.token)
-    redirect_to repos_path
+    get_from_github
+    redirect_to '/'
   end
 
   def destroy
@@ -24,17 +24,18 @@ class GithubController < ApplicationController
 
   private
 
-    def github(login, token)
-      github = Github.new do |config| 
-        config.basic_auth = "#{login}:#{token}"
-        # add extra config here
+    def get_from_github
+      client = Octokit::Client.new(:access_token => ENV['GITHUB_ACCESS_TOKEN'])
+      client.organizations.each { |org| current_user.organizations.find_or_create_by(
+        name: org[:login],
+        avatar_url: org[:avatar_url],
+        description: org[:description]
+        )
+      Organization.all.each do |organization|
+        client.organization_repositories(org[:login]).each do |repo|
+          organization.repositories.find_or_create_by(name: repo.full_name)
+        end
       end
-      @repos = github.repos.all.map(&:name)
-      save_repos
+      }
     end
-
-    def save_repos
-      @repos.each { |repo| current_user.repos.find_or_create_by(name: repo) } unless @repos.empty?
-    end
-
 end
