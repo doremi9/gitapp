@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101114433) do
+ActiveRecord::Schema.define(version: 20171103205851) do
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -23,14 +23,13 @@ ActiveRecord::Schema.define(version: 20171101114433) do
   end
 
   create_table "pull_requests", force: :cascade do |t|
-    t.integer  "pr_id"
-    t.integer  "number"
-    t.string   "state"
-    t.string   "title"
-    t.string   "body"
-    t.datetime "created_date"
-    t.integer  "repo_id"
-    t.index ["repo_id"], name: "index_pull_requests_on_repo_id"
+    t.integer "pr_id"
+    t.integer "number"
+    t.string  "state"
+    t.string  "title"
+    t.string  "body"
+    t.integer "repository_id"
+    t.index ["repository_id"], name: "index_pull_requests_on_repository_id"
   end
 
   create_table "repositories", force: :cascade do |t|

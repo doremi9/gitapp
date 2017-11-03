@@ -1,0 +1,7 @@
+<h1>Pull requests</h1>
+<% @repo.pull_requests.each do |pr| %>
+  <ul>
+    <li>Title: <%= pr.title %></li>
+    <li>Description: <%= pr.body %></li>
+  </ul>
+<% end %>

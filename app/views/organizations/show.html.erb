@@ -1,3 +1,7 @@
-<%= @organization.name %>
-<%= @organization.description %>
-<%= @organization.avatar_url %>
+<ul>
+  <li><%= image_tag @organization.avatar_url, width: '50', height: '50', class: 'img-circle' %></li>
+  <li><%= @organization.name %></li>
+  <li><%= @organization.description %></li>
+</ul>
+
+
