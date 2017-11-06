@@ -15,16 +15,18 @@ class GithubService
 
     def save_organizations
       @client.organizations.each { |org| @user.organizations.find_or_create_by(
-          name:        org[:login],
-          avatar_url:  org[:avatar_url],
-          description: org[:description]
-          )}
+        name:        org[:login],
+        avatar_url:  org[:avatar_url],
+        description: org[:description]
+        )}
     end
 
     def save_repositories
       Organization.all.each do |organization| 
-        @client.org_repos(organization.name).each do |repo|
-          organization.repositories.find_or_create_by(name: repo.full_name)
+        @client.org_repos(organization.name, type: "owner").each do |repo|
+          organization.repositories.find_or_create_by(name: repo.full_name,
+            user: @user
+            )
         end
       end
     end

@@ -1,9 +1,12 @@
 class RepositoriesController < ApplicationController
+  before_action :get_current_user
+
   def index
-    @repos = Repository.includes(:organization).all
+    @repos = @user.repositories
   end
 
   def show
-    @repo = Repository.find(params[:id])
+    @repo = @user.repositories.find(params[:id])
   end
+
 end

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103205851) do
+ActiveRecord::Schema.define(version: 20171106175353) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "text"
+    t.string   "gif_url"
+    t.integer  "pull_request_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["pull_request_id"], name: "index_comments_on_pull_request_id"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -37,7 +46,9 @@ ActiveRecord::Schema.define(version: 20171103205851) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "organization_id"
+    t.integer  "user_id"
     t.index ["organization_id"], name: "index_repositories_on_organization_id"
+    t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

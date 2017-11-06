@@ -1,6 +1,8 @@
 class GithubController < ApplicationController
+  before_action :get_current_user, only: [:index]
 
   def index
+    @user_repos = @user.repositories
   end
 
   def fetch
@@ -27,7 +29,19 @@ class GithubController < ApplicationController
   end
 
   def webhooks
-    puts "webhook received!"
+    create_comment_for_pull_request
   end
 
-end
+  private
+
+    def create_comment_for_pull_request
+      Organization.find_by(name: params[:organization][:login])
+                  .repositories.find_by(name: params[:repository][:full_name])
+                  .pull_requests.find_by(pr_id: params[:pull_request][:id])
+                  .comments.create(text: "Siema, ziomal! Wszystko jest OK!", gif_url: gif_url)
+    end
+
+    def gif_url
+      Giphy.random('excited').image_url.to_s
+    end
+  end

@@ -6,9 +6,25 @@
     <%= link_to "Sign up with GitHub!", '/auth/github', class: "btn btn-lg btn-primary" %>
   </div>
 <% else %>
-  <div class="activities">
-    <h1>Recent activities</h1>
-    <h3>Some user details below</h3>
-    <h3>Some repositories on the right</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-8">
+          <%= image_tag(current_user.profile_image, width: '229', height: '230') %>
+          <h3>Some user details below</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="list-group">
+            <h4 class="list-group-item list-group-item-action active">Your repositories<span class="badge"><%= @user_repos.size %></span>
+            </h4>
+            <% @user_repos.each do |repo| %>
+              <%= link_to repo.name, repository_path(repo), class: "list-group-item list-group-item-action" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 <% end %>

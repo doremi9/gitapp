@@ -5,6 +5,7 @@ Create your [Personal Access Token](https://github.com/settings/tokens).
 
 
 1. Local installation
+
 Add your Personal Access Token to your environment variables.
 ```bash
 vim ~/.bash_profile
