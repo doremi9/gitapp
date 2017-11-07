@@ -1,8 +1,10 @@
 class GithubController < ApplicationController
-  before_action :get_current_user, only: [:index]
 
   def index
-    @user_repos = @user.repositories
+    if current_user
+      @user_repos = current_user.repositories
+      @user_orgs  = current_user.organizations
+    end
   end
 
   def fetch

@@ -5,10 +5,8 @@
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li>Signed in as <%= current_user.login %></li>
-            <li><%= link_to 'Organizations', organizations_path %></li>
             <li><%= link_to 'Repositories', repositories_path %></li>
             <li><%= link_to 'Refresh data', fetch_github_data_path %></li>
-            
             <li><%= link_to "Log out", sign_out_path, method: "delete"%></li>
           <% end %>
         </ul>

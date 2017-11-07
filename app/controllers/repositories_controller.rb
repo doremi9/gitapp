@@ -1,12 +1,16 @@
 class RepositoriesController < ApplicationController
-  before_action :get_current_user
-
+  before_action :warn_user
+  
   def index
-    @repos = @user.repositories
+    @repos = current_user.organizations.find(params[:organization_id]).repositories
   end
 
   def show
-    @repo = @user.repositories.find(params[:id])
+    @repo = current_user.organizations.find(params[:organization_id]).repositories.find(params[:id])
+  end
+
+  def all
+    @repos = current_user.repositories
   end
 
 end

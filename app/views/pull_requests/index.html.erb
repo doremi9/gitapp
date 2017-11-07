@@ -1,0 +1,42 @@
+<div class="col-md-8">
+  <h3 class="text-center">
+    Pull Requests
+  </h3>
+  <div class="tabbable" id="tabs-96340">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#panel-676689" data-toggle="tab">All</a>
+      </li>
+      <li>
+        <a href="#panel-152049" data-toggle="tab">Open</a>
+      </li>
+      <li>
+        <a href="#panel-152050" data-toggle="tab">Closed</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="panel-676689">
+        <% @pulls.each do |pull| %>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success"><%= link_to pull.title, 
+              organization_repository_pull_request_comments_path(pull_request_id: pull.id) %></li>
+          </ul>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="panel-152049">
+        <% @active_pulls.each do |pull| %>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success"><%= pull.title %></li>
+          </ul>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="panel-152050">
+        <% @closed_pulls.each do |pull| %>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success"><%= pull.title %></li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

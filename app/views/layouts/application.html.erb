@@ -15,8 +15,34 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container">
-      <%= yield %>
+    <% if !current_user %>
+      <div class="center jumbotron">
+        <h1>Welcome to GitHub App</h1>
+        <%= link_to "Sign up with GitHub!", '/auth/github', class: "btn btn-lg btn-primary" %>
+      </div>
+    <% else %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <div class="card" style="width: 20rem;">
+              <%= image_tag current_user.profile_image, class: "card-img-top", alt: "Card image cap", width: '229', height: '230' %>
+              <div class="card-body">
+                <h4 class="card-title login"><%= current_user.login %></h4>
+                <h4 class="card-text">Organizations</h4>
+              </div>
+              <ul class="list-unstyled">
+                <% current_user.organizations.each do |organization| %>
+                  <li><%= link_to image_tag(organization.avatar_url, width: '35', height: '35'), organization_repositories_path(organization) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <%= yield %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

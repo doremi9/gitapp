@@ -8,9 +8,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def get_current_user
-    @user = current_user
+  def warn_user
+     unless current_user
+      redirect_to root_url, alert: 'You must be logged in to access this page!'
+    end
   end
 
-  helper_method :current_user, :get_current_user
+  helper_method :current_user, :warn_user
 end
