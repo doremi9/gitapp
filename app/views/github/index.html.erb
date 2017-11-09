@@ -10,13 +10,4 @@
       </li>
     </ul>
   </div>
-  <div class="col-md-2">
-    <div class="list-group">
-      <h4 class="list-group-item list-group-item-action active">Your repositories<span class="badge"><%= @user_repos.size %></span>
-      </h4>
-      <% @user_repos.each do |repo| %>
-        <%= link_to repo.name, repositories_path(repo), class: "list-group-item list-group-item-action" %>
-      <% end %>
-    </div>
-  </div>
 <% end %>

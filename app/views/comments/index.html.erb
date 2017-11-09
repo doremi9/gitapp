@@ -9,8 +9,9 @@
               <div class="comment-avatar"><%= image_tag 'my_logo.png', width: 59, height: 59 %></div>
               <div class="comment-box">
                 <div class="comment-head">
-                  <h6 class="comment-text "></h6>
+                  <h6 class="comment-text"></h6>
                   <p><%= comment.text %><%= image_tag comment.gif_url, class: "gif", alt: "Excited gif", width: '60', height: '60' %></p>
+                  <span>Added <%= comment.created_at %></span>
                 </div>
               </div>
             <% end %>

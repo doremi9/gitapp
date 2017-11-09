@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :require_login
   def index
     @comments = current_user.repositories
                             .find(params[:repository_id])
