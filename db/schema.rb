@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108130841) do
+ActiveRecord::Schema.define(version: 20171109215028) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20171108130841) do
     t.string  "body"
     t.integer "repository_id"
     t.string  "author"
+    t.string  "author_avatar_url"
     t.index ["repository_id"], name: "index_pull_requests_on_repository_id"
   end
 

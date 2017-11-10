@@ -14,9 +14,8 @@ class GithubController < ApplicationController
   end
   
   def callback
-    auth = request.env["omniauth.auth"]
-    session[:omniauth] = auth.except('extra')
-    user = User.sign_in_from_omniauth(auth)
+    user_data = OmniauthParserService.new.parse(request.env["omniauth.auth"])
+    user = UserService.new.call(user_data)
     session[:user_id] = user.id
     redirect_to fetch_github_data_path
   end
@@ -29,48 +28,10 @@ class GithubController < ApplicationController
   end
 
   def webhooks
-    Rails.logger.debug '---------current user------'
-    puts user_repos
-    Rails.logger.debug '---------current user------'
-    # create_pull_request_from(response_params)
-    # create_comment_for_pull_request
-  end
-
-  private
-
-    def create_pull_request_from(parameters)
-      user_repos.pull_requests.find_or_create_by(parameters)
-    end
-
-    def response_params
-      {
-        pr_id:        params[:pull_request][:id],
-        number:       params[:pull_request][:number],
-        state:        params[:pull_request][:state],
-        title:        params[:pull_request][:title],
-        body:         params[:pull_request][:body],
-        author:       params[:pull_request][:user][:login],
-        repository:   params[:repository][:full_name],
-        organization: params[:organization][:login]
-      }
-    end
-
-    def user_repos
-      Rails.logger.debug '---------current user------'
-      puts current_user#.find_by(name: response_params[:organization])
-                  #.repositories.find_by(name: response_params[:repository])
-      Rails.logger.debug '---------current user------'
-    end
-
-    # def create_comment_for_pull_request
-    #   user_repos.pull_requests.find_by(pr_id: response_params[:pr_id])
-    #             .comments.create(
-    #               text: "Siema, ziomal! Wszystko jest OK!",
-    #               gif_url: gif_url
-    #               )
-    # end
-
-    def gif_url
-      Giphy.random('excited').image_url.to_s
+    if params[:github][:action] == "opened"
+      payload = PayloadParserService.new.parse(params)
+      WebhookService.new.handle_webhook(payload)
     end
   end
+
+end
