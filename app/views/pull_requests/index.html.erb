@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-6">
   <h3 class="text-center">
     Pull Requests
   </h3>
@@ -18,24 +18,39 @@
       <div class="tab-pane active" id="panel-676689">
         <% @pulls.each do |pull| %>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-success"><%= link_to pull.title, 
-              organization_repository_pull_request_comments_path(pull_request_id: pull.id) %></li>
+            <li class="list-group-item list-group-item-success"><%= pull.title %></li>
+            <% pull.comments.each do |comment| %>
+            <div class="comments-container">
+              <ul id="comments-list" class="comments-list">
+                <li>
+                  <div class="comment-main-level">
+                    <div class="comment-avatar"><%= image_tag 'my_logo.png', width: 59, height: 59 %></div>
+                    <div class="comment-box">
+                      <div class="comment-head">
+                        <h6 class="comment-text"></h6>
+                        <p><%= comment.text %><%= image_tag comment.gif_url, class: "gif", alt: "Excited gif", width: '60', height: '60' %></p>
+                        <span>Added <%= comment.created_at %></span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </ul>
+          <% end %>
         <% end %>
       </div>
       <div class="tab-pane" id="panel-152049">
         <% @active_pulls.each do |pull| %>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-success"><%= link_to pull.title, 
-              organization_repository_pull_request_comments_path(pull_request_id: pull.id) %></li>
+            <li class="list-group-item list-group-item-success"><%= pull.title %></li>
           </ul>
         <% end %>
       </div>
       <div class="tab-pane" id="panel-152050">
         <% @closed_pulls.each do |pull| %>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-success"><%= link_to pull.title, 
-              organization_repository_pull_request_comments_path(pull_request_id: pull.id) %></li>
+            <li class="list-group-item list-group-item-success"><%= pull.title %></li>
           </ul>
         <% end %>
       </div>

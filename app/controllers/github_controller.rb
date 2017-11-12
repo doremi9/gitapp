@@ -9,15 +9,16 @@ class GithubController < ApplicationController
 
   def fetch
     GithubService.new(current_user, ENV['GITHUB_ACCESS_TOKEN']).call
-    flash[:success] = "You have successfully signed in!"
+    
     redirect_to root_url
   end
   
   def callback
-    user_data = OmniauthParserService.new.parse(request.env["omniauth.auth"])
-    user = UserService.new.call(user_data)
+    auth = request.env["omniauth.auth"]
+    user = UserService.new.call(auth)
     session[:user_id] = user.id
-    redirect_to fetch_github_data_path
+    flash[:success] = "You have successfully signed in!"
+    redirect_to root_url
   end
 
   def destroy

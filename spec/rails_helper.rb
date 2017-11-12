@@ -6,21 +6,15 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'database_cleaner'
+# require 'webmock/rspec'
 
-OmniAuth.config.test_mode = true
-  omniauth_hash = { 'provider' => 'github',
-                    'uid' => '5911945',
-                    'info' => {
-                        'login' => 'jedrekdomanski',
-                        'image' => 'https://avatars3.githubusercontent.com/u/5911945?v=4'         
-                    }
-                  }
- 
-OmniAuth.config.add_mock(:github, omniauth_hash)
-
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include Features, type: :feature
+  config.include WebMock::API
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
