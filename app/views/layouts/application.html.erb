@@ -36,7 +36,7 @@
               </div>
               <ul class="list-unstyled">
                 <% current_user.organizations.each do |organization| %>
-                  <li><%= link_to image_tag(organization.avatar_url, width: '35', height: '35'), organization_repositories_path(organization) %>
+                  <li><%= link_to image_tag(organization.avatar_url, width: '35', height: '35'), organization_repositories_path(organization), id: "org-avatar" %>
                   </li>
                 <% end %>
               </ul>

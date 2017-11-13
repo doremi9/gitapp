@@ -9,7 +9,6 @@ class GithubController < ApplicationController
 
   def fetch
     GithubService.new(current_user, ENV['GITHUB_ACCESS_TOKEN']).call
-    
     redirect_to root_url
   end
   
@@ -34,5 +33,5 @@ class GithubController < ApplicationController
       WebhookService.new.handle_webhook(payload)
     end
   end
-
 end
+

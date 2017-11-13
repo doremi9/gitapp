@@ -72,7 +72,7 @@ p {
 /* Comments*/
 
 .comments-container {
-  margin: 60px auto 15px;
+  margin: 15px auto 15px;
   width: 768px;
 }
 
@@ -94,29 +94,6 @@ p {
 
 ul {
   list-style-type: none;
-}
-
-/* List of comments */
-
-.comments-container {
-  margin: 60px auto 15px;
-  width: 768px;
-}
-
-.comments-container h1 {
-  font-size: 36px;
-  color: #283035;
-  font-weight: 400;
-}
-
-.comments-container h1 a {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.comments-list {
-  margin-top: 30px;
-  position: relative;
 }
 
 .comments-list li {
@@ -176,6 +153,10 @@ ul {
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.comment-box {
+  margin-bottom: 10px;
 }
 
 .comments-list .comment-box:before, .comments-list .comment-box:after {

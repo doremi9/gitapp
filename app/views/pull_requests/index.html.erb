@@ -3,22 +3,11 @@
     Pull Requests
   </h3>
   <div class="tabbable" id="tabs-96340">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#panel-676689" data-toggle="tab">All</a>
-      </li>
-      <li>
-        <a href="#panel-152049" data-toggle="tab">Open</a>
-      </li>
-      <li>
-        <a href="#panel-152050" data-toggle="tab">Closed</a>
-      </li>
-    </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="panel-676689">
         <% @pulls.each do |pull| %>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-success"><%= pull.title %></li>
+            <li class="list-group-item">Title: <%= pull.title %></li>
             <% pull.comments.each do |comment| %>
             <div class="comments-container">
               <ul id="comments-list" class="comments-list">
