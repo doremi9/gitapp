@@ -28,10 +28,7 @@ class GithubController < ApplicationController
   end
 
   def webhooks
-    if params[:github][:action] == "opened"
-      payload = PayloadParserService.new.parse(params)
-      WebhookService.new.handle_webhook(payload)
-    end
+    WebhookService.new.handle_webhook(params)
   end
 end
 
