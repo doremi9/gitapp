@@ -1,14 +1,17 @@
 class WebhookService
+  UserNotFound = Class.new(StandardError)
 
-  def handle_webhook(params)
+  def call(params)
     if params[:github][:action] == "opened"
-      save_webhook(params)
+      user = User.find_by(gh_webhook_token: params[:gh_webhook_token])
+      raise UserNotFound if user.blank?
+      save_webhook(user, params)
     end
   end
 
   private
 
-  def save_webhook(params)
+  def save_webhook(user, params)
     organization(params[:organization]).repositories.find_or_create_by(
       name: params[:repository][:full_name],
       user_id: 12

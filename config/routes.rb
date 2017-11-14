@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'github#callback'
   delete 'sign_out',   to: 'github#destroy', as: 'sign_out'
   get '/fetch',        to: 'github#fetch',   as: 'fetch_github_data'
-  post '/webhooks',    to: 'github#webhooks',as: 'webhooks'
-
+  # post '/webhooks',    to: 'github#webhooks',as: 'webhooks'
+  post '/:gh_webhook_token/webhooks', to: 'github#webhooks', as: 'webhooks'
 end
+

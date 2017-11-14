@@ -21,9 +21,10 @@ RSpec.feature "Authentication", type: :feature do
   end
 
   context "unauthenticated user" do
-    it "should not give access to organization repositories" do
+    it "should not have access to organization repositories" do
       visit root_url
       expect(page).not_to have_content('Organizations')
+      expect(page).not_to have_content('Log out')
     end
   end
 
