@@ -1,10 +1,6 @@
 class GithubController < ApplicationController
 
   def index
-    if current_user
-      @user_repos = current_user.repositories
-      @user_orgs  = current_user.organizations
-    end
   end
 
   def fetch

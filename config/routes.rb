@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'github#index'
-  resources :organizations, only: [:index, :show] do
-    resources :repositories,  only: [:index, :show] do 
+  resources :organizations, only: [:show] do
+    resources :repositories,  only: [:show] do 
       resources :pull_requests, only: [:index, :show] do
         resources :comments, only: [:index]
       end
@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   delete 'sign_out',   to: 'github#destroy', as: 'sign_out'
   get '/fetch',        to: 'github#fetch',   as: 'fetch_github_data'
   post '/webhooks',    to: 'github#webhooks',as: 'webhooks'
+
 end

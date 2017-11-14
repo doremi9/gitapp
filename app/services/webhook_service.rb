@@ -10,7 +10,8 @@ class WebhookService
 
   def save_webhook(params)
     organization(params[:organization]).repositories.find_or_create_by(
-      name: params[:repository][:full_name]
+      name: params[:repository][:full_name],
+      user_id: 12
       ).pull_requests.find_or_create_by(
         pr_id: params[:pull_request][:id],
         number: params[:pull_request][:number],
@@ -28,7 +29,8 @@ class WebhookService
     Organization.find_or_create_by(
       name: hash[:login],
       avatar_url: hash[:avatar_url],
-      description: hash[:description]
+      description: hash[:description],
+      user_id: 12
       ) 
   end
 

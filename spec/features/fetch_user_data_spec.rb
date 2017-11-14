@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Github Service", type: :feature do
-  let(:token)     { '123abc' }
-  let(:auth_hash) { OmniAuth.config.mock_auth[:github] }
+  let(:token) { '123abc' }
   let(:organizations) { [ { login: 'organization_name', avatar_url: 'https://test_org.com/name', description: 'asdasd'}] }
   let(:org_repos) { [ OpenStruct.new(full_name: 'repo_1') ] }
   let(:pull_request_user) { OpenStruct.new(avatar_url: 'avatar_url') }
@@ -27,6 +26,6 @@ RSpec.feature "Github Service", type: :feature do
 
     click_link('repo')
     expect(page).to have_content('Pull requests')
-
+  end
 end
  
