@@ -24,7 +24,7 @@ RSpec.describe GithubService do
       expect do
         expect do
           service.call
-        end.to change { user.organization.count }.by(1)
+        end.to change { user.organizations.count }.by(1)
       end.to change { user.repositories.count }.by(1)
     end.to change{ user.count }.by(1)
   end

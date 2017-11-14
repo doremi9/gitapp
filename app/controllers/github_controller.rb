@@ -23,7 +23,10 @@ class GithubController < ApplicationController
     redirect_to root_url
   end
 
-  def webhooks
+  def webhook
+    Rails.logger.debug '--------------params------------'
+    puts params[:gh_webhook_token]
+    Rails.logger.debug '--------------params------------'
     WebhookService.new.call(params)
   rescue WebhookService::UserNotFound
     Rails.logger.info("Received webhook for non existing user: #{params[:gh_webhook_token]}")

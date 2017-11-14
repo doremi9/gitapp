@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109215028) do
+ActiveRecord::Schema.define(version: 20171114213431) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
@@ -40,7 +40,9 @@ ActiveRecord::Schema.define(version: 20171109215028) do
     t.integer "repository_id"
     t.string  "author"
     t.string  "author_avatar_url"
+    t.integer "user_id"
     t.index ["repository_id"], name: "index_pull_requests_on_repository_id"
+    t.index ["user_id"], name: "index_pull_requests_on_user_id"
   end
 
   create_table "repositories", force: :cascade do |t|
@@ -54,12 +56,12 @@ ActiveRecord::Schema.define(version: 20171109215028) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider"
     t.string   "uid"
     t.string   "login"
     t.string   "profile_image"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "gh_webhook_token"
   end
 
 end

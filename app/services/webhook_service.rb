@@ -12,9 +12,13 @@ class WebhookService
   private
 
   def save_webhook(user, params)
-    organization(params[:organization]).repositories.find_or_create_by(
-      name: params[:repository][:full_name],
-      user_id: 12
+    user.organizations.find_or_create_by(
+      name: params[:organization][:login],
+      avatar_url: params[:organization][:avatar_url],
+      description: params[:organization][:description]
+      )
+      .repositories.find_or_create_by(
+        name: params[:repository][:full_name],
       ).pull_requests.find_or_create_by(
         pr_id: params[:pull_request][:id],
         number: params[:pull_request][:number],
@@ -25,16 +29,7 @@ class WebhookService
         author_avatar_url: params[:sender][:avatar_url]
       ).comments.create(
         text: "Hey, everything is OK!", gif_url: gif_url
-        )
-  end
-
-  def organization(hash)
-    Organization.find_or_create_by(
-      name: hash[:login],
-      avatar_url: hash[:avatar_url],
-      description: hash[:description],
-      user_id: 12
-      ) 
+      )
   end
 
   def gif_url
