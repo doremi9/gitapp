@@ -43,7 +43,8 @@ class GithubService
           title:  pull_request.title,
           body:   pull_request.body,
           author: pull_request.user.login,
-          author_avatar_url: pull_request.user.avatar_url
+          author_avatar_url: pull_request.user.avatar_url,
+          user: @user
         )
       end
     end

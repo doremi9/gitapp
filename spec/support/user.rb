@@ -1,10 +1,18 @@
 module Features
-  def create_or_find_user(omniauth_hash)
-    User.find_or_create_by(
-      login: omniauth_hash[:info][:name],
-      uid: omniauth_hash[:uid],
-      profile_image: omniauth_hash[:info][:image]
+  def create_or_find_user(auth)
+    user = User.find_or_create_by(
+      login: auth[:info][:nickname], 
+      uid: auth[:uid],
+      profile_image: auth[:info][:image]
     )
+    if new_user?(user)
+      user.update_attribute(:gh_webhook_token, SecureRandom.hex(10))
+    end
+    user
+  end
+
+  def new_user?(user)
+    user.gh_webhook_token == nil
   end
 end
 

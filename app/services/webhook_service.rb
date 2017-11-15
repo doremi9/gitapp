@@ -19,6 +19,7 @@ class WebhookService
       )
       .repositories.find_or_create_by(
         name: params[:repository][:full_name],
+        user_id: user.id
       ).pull_requests.find_or_create_by(
         pr_id: params[:pull_request][:id],
         number: params[:pull_request][:number],
@@ -26,7 +27,8 @@ class WebhookService
         title: params[:pull_request][:title],
         body: params[:pull_request][:body],
         author: params[:sender][:login],
-        author_avatar_url: params[:sender][:avatar_url]
+        author_avatar_url: params[:sender][:avatar_url],
+        user_id: user.id
       ).comments.create(
         text: "Hey, everything is OK!", gif_url: gif_url
       )
