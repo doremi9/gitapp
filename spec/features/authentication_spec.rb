@@ -27,9 +27,11 @@ RSpec.feature "Authentication", type: :feature do
     end 
   end
 
-  context "unauthenticated user" do
-    it "should not have access to organization repositories" do
+  context "not logged in user enters url manualy in the browser" do
+    it "should display an error" do
       visit root_url
+      visit 'organizations/1'
+      expect(page).to have_content('You must be logged in to access this section')
       expect(page).to have_content('Sign up with Github')
       expect(page).not_to have_content('Organizations')
       expect(page).not_to have_content('Log out')
