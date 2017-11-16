@@ -10,7 +10,6 @@ The idea of this application is to process GitHub webhooks. A user signs up with
 ## Installation instructions
 Generate your [Personal Token](https://github.com/settings/tokens) and update .env file.
 
-```.env```
 GITHUB_ACCESS_TOKEN=your_40_character_token
 
 ```docker-compose run app rails db:migrate```
