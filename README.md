@@ -8,10 +8,15 @@ The idea of this application is to process GitHub webhooks. A user signs up with
 2. Webhooks - webhook JSON does not contain the owner of the organization the event occured on which makes it difficult to associate particular event to a specific user in the application. My idea to solve this problem was to have a user sign up with GitHub first and generate a random 10 character token for him in the background and use it as his unique Webhook URL. The user, then, can access it by visiting Settings page and use it as his own Webhook URL on his organization settings page on GitHub. This ensures that the webhook is not sent (accidentally or deliberately) to somebody that should not receive it and that each particular event that occures within user's organization on Github is associated to a specific user in the application.
 
 ## Installation instructions
+Generate your [Personal Token](https://github.com/settings/tokens) and update .env file.
+
+```.env```
+GITHUB_ACCESS_TOKEN=your_40_character_token
 
 ```docker-compose run app rails db:migrate```
 
 ```docker-compose up```
+
 
 visit ```localhost:3001```
 
