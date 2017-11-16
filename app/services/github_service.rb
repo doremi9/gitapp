@@ -2,7 +2,7 @@ class GithubService
 
   def initialize(user, token)
     @user   = user
-    @client = Octokit::Client.new(:access_token => token)
+    @client = Octokit::Client.new(access_token: token)
   end
 
   def call
