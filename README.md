@@ -9,11 +9,9 @@ The idea of this application is to process GitHub webhooks. A user signs up with
 
 ## Installation instructions
 
-```bash docker-compose run app rails db:migrate```
+```docker-compose run app rails db:migrate```
 
-```bash docker-compose up```
+```docker-compose up```
 
-visit 
-
-```bash localhost:3001```
+visit ```localhost:3001```
 
