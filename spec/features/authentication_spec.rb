@@ -38,4 +38,13 @@ RSpec.feature "Authentication", type: :feature do
     end
   end
 
+  context "user logs out" do
+    it "should display a message 'You have successfully signed out!" do
+      login_with_github
+      click_link 'Log out'
+      expect(page).to have_content('You have successfully signed out!')
+      expect(page).to have_content('Sign up with Github')
+    end
+  end
+
 end

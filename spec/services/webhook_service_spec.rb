@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe WebhookService do
 
   it "associates the event to an existing user" do
-    user = User.create(login: 'asdas', uid: 123, profile_image: 'http://test.com/name', gh_webhook_token: '12345abcde')
+    user = User.create(login: 'asdas', uid: 123, profile_image: 'http://test.com/name', 
+           gh_webhook_token: '12345abcde')
 
     params = {
       gh_webhook_token: '12345abcde',
@@ -43,7 +44,9 @@ RSpec.describe WebhookService do
   end
 
   it "raises WebhookService::UserNotFound error if webhook is sent to invalid user" do
-    User.create(login: 'asdas', uid: 123, profile_image: 'http://test.com/name', gh_webhook_token: '12345abcdeasdasd')
+    User.create(login: 'asdas', uid: 123, profile_image: 'http://test.com/name', 
+                gh_webhook_token: '12345abcdeasdasd')
+
     params = {
       gh_webhook_token: '12345abcdedsa',
       github: {
