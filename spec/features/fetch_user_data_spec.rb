@@ -7,7 +7,7 @@ RSpec.feature "Github Service", type: :feature do
   let(:pull_request_user) { OpenStruct.new(avatar_url: 'avatar_url') }
   let(:pull_requests) { [ OpenStruct.new(id: '123', number: 123, state: 'open', title: 'title', body: 'body', author: 'test_user', user: pull_request_user) ] }
 
-  scenario 'download user data from GitHub API' do
+  scenario 'fetch and display data for user from GitHub API' do
     login_with_github
 
     ENV['GITHUB_ACCESS_TOKEN'] = token
