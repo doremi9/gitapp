@@ -1,7 +1,7 @@
 # Github Checker
 
 ## Description
-The idea of this application is to process GitHub webhooks. A user signs up with GitHub and sets his Webhook URL on GitHub to point to this application. Then, the user subscribes to pull request events within his organization and eveytime a new pull request is opened on his organization repository the webhook will be sent to this applicaion. The application then will add a comment to the pull request. User can download his organizations and repositories by clicking 'Download data' button.
+The idea of this application is to process GitHub webhooks. A user signs up with GitHub and sets his Webhook URL on GitHub to point to this application. Then, the user subscribes to pull request events within his organization and everytime a new pull request is opened on his organization repository the webhook will be sent to this applicaion. The application then will add a comment to the pull request. User can download his organizations and repositories by clicking 'Download data' button.
 
 ## Problems solved
 1. Authentication with Github - I used Omniauth-github gem

@@ -59,7 +59,7 @@ RSpec.describe WebhookService do
         title: "test title",
         body: "test body"
       },
-      organizations: {
+      organization: {
         login: "testlogin",
         avatar_url: "http://test.com/name",
         description: "description"
@@ -73,5 +73,46 @@ RSpec.describe WebhookService do
       }
     }
     expect{WebhookService.new.call(params)}.to raise_error(WebhookService::UserNotFound)
+  end
+
+  it "associates the event to correct user" do
+    user1 = User.create(login: 'asdas', uid: 123, profile_image: 'http://test.com/name', 
+           gh_webhook_token: '012345abcde')
+    user2 = User.create(login: 'asdas', uid: 123, profile_image: 'http://test.com/name', 
+           gh_webhook_token: 'fffffffff')
+
+    params = {
+      gh_webhook_token: '012345abcde',
+      github: {
+        action: "opened"
+      },
+      pull_request: {
+        id: 123,
+        number: 1,
+        state: "open",
+        title: "test title",
+        body: "test body"
+      },
+      organization: {
+        login: "testlogin",
+        avatar_url: "http://test.com/name",
+        description: "description"
+      },
+      repository: {
+        full_name: "testname"
+      },
+      sender: {
+        login: "testsenderlogin",
+        author_avatar_url: "http://test.com/username"
+      }
+    }
+          
+    expect do
+      expect do
+        expect do
+          WebhookService.new.call(params)
+        end.to_not change {user2.organizations.count}
+      end.to_not change{user2.repositories.count}
+    end.to_not change{user2.pull_requests.count}
   end
 end
